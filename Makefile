@@ -7,7 +7,11 @@ WAL_PATH := .
 
 GXX  := g++
 SRCS := $(WAL_PATH)/src/common/error.cc
+SRCS += $(WAL_PATH)/src/idl/wal.pb.cc
+SRCS += $(WAL_PATH)/src/wal_store.cc
 OBJS += error.o
+OBJS += wal.pb.o
+OBJS += wal_store.o
 TARGET_NAME := --shared -fPIC -o libwal.so
 INCLUDES := -I$(ROCKSDB_PATH)/include
 INCLUDES += -I$(GLOG_PATH)/include
@@ -37,8 +41,12 @@ wal:
 	@echo $(INCLUDES)
 	@echo $(LIBS)
 	@echo $(FLAGS)
+	@pwd
+	protoc --proto_path=$(WAL_PATH)/src/idl wal.proto --cpp_out=$(WAL_PATH)/src/idl/
+	@pwd
 	$(GXX) -c $(SRCS) $(INCLUDES) $(FLAGS)
 	$(GXX) $(TARGET_NAME) $(OBJS) $(INCLUDES) $(LIBS)
-
+	rm -rf ./*.o
+	mv libwal.so $(WAL_PATH)/lib
 clean:
 	rm -rf ./*.o

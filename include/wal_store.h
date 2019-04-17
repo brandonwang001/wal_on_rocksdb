@@ -15,7 +15,7 @@
 #include "wal_stream_inf.h"
 #include "wal_stream.h"
 
-namespace rocksdb_wal {
+namespace wal {
 
 struct WalStoreOptions {
  public:

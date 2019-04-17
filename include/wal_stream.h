@@ -15,7 +15,7 @@
 #include "wal_stream_inf.h"
 #include "idl/wal.pb.h"
 
-namespace rocksdb_wal {
+namespace wal {
 
 struct WalStreamOptions {
  public:

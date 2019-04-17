@@ -4,7 +4,7 @@
 
 #include "common/error.h"
 
-namespace rocksdb_wal {
+namespace wal {
 
 struct WalStreamInf {
  public:
