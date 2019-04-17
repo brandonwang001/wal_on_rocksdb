@@ -1,0 +1,14 @@
+syntax = "proto2";
+package wal;
+
+message WalStreamMeta {
+  repeated bytes stream_uuids = 1;
+}
+
+message WalStreamLowerBoundMeta {
+  optional uint64 lower_bound = 1;
+}
+
+message WalStreamUpperBoundMeta {
+  optional uint64 upper_bound = 2;
+}
