@@ -1,8 +1,17 @@
 syntax = "proto2";
 package wal;
 
+message WalRecord {
+  optional int64 term = 1;
+  optional bytes log = 2;
+}
+
 message WalStreamMeta {
   repeated bytes stream_uuids = 1;
+}
+
+message WalStreamNextLogIdMeta {
+  optional uint64 next_log_id = 1;
 }
 
 message WalStreamLowerBoundMeta {

@@ -41,6 +41,8 @@ class Error {
   std::string error_msg_;
 };
 
+ErrorCode Ok();
+
 #define RETURN_OK() \
 do { \
   Error ret(ErrorCode::kOk); \
@@ -51,6 +53,13 @@ do { \
 do { \
   Error ret(code); \
   return ret; \
+} while (false)
+
+#define IF_NOT_OK_RETURN(ret) \
+do { \
+  if (ret != Ok()) { \
+    return ret; \
+  } \
 } while (false)
 
 }  // namespace wal

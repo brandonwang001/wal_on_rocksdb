@@ -17,6 +17,11 @@
 
 namespace wal {
 
+enum class BatchWriteType : int {
+  kPut = 1,
+  kDelete = 2,
+};
+
 struct WalStreamOptions {
  public:
   rocksdb::DB* db_;
@@ -25,6 +30,10 @@ struct WalStreamOptions {
 
 class WalStream : public WalStreamInf {
  public:
+  const std::string kLowerBoundMetaSuffix = "lowerbound";
+  const std::string kUpperBoundMetaSuffix = "upperbound";
+  const std::string kNextLogIdMetaSuffix = "nextlogid";
+
   ~WalStream() override {
   }
 
@@ -42,7 +51,10 @@ class WalStream : public WalStreamInf {
       const std::string& log) override;
 
   Error GetLog(int64_t log_id,
+      int64_t* term,
       std::string* log) override;
+
+  Error GetNextLogId(int64_t* log_id) override;
 
   Error GetLastLogId(int64_t* log_id) override;
 
@@ -58,34 +70,45 @@ class WalStream : public WalStreamInf {
   Error Truncate(int64_t log_id) override;
  
  private:
-  Error ReadKey(const std::string& key, std::string* value);
-
-  Error BatchWrite(const std::vector<
-      std::pair<std::string, std::string>>& pairs);
-
   Error AssembleData(int64_t log_id, int64_t term,
       const std::string& log, std::string* key,
       std::string* value);
+
+  Error ReadData(int64_t log_id, int64_t* term,
+      std::string* log);
 
   Error DeleteFrom(int64_t log_id_start);
 
   Error DeleteTo(int64_t log_id_end);
 
-  Error UpdateLogIdLowerBound(int64_t log_id);
+  Error WriteMeta(int64_t log_id_lower_bound,
+      int64_t log_id_upper_bound,
+      int64_t next_log_id);
+ 
+  Error ReadMeta(int64_t* log_id_lower_bound,
+      int64_t* log_id_upper_bound,
+      int64_t* next_log_id);
+
+  Error BatchWrite(const std::vector<
+      std::tuple<BatchWriteType, std::string,
+      std::string>>& batchs);
+
+  Error ReadKey(const std::string& key,
+      std::string* value);
 
   Error GetLogIdLowerBound(int64_t* log_id);
 
-  Error UpdateLogIdUpperBound(int64_t log_id);
-
   Error GetLogIdUpperBound(int64_t* log_id);
 
-  Error UpdateLogIdRange(int64_t log_id_lower_bound,
-      int64_t log_id_upper_bound);
+  Error GetNextLogIdInner(int64_t* log_id);
 
   Error AssembleLowerBoundMeta(int64_t log_id,
       std::string* key, std::string* value);
 
   Error AssembleUpperBoundMeta(int64_t log_id,
+      std::string* key, std::string* value);
+
+  Error AssembleNextLogIdMeta(int64_t log_id,
       std::string* key, std::string* value);
 
   std::mutex mutex_;

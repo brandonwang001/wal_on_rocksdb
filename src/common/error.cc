@@ -3,6 +3,7 @@
 #include <unordered_map>
 
 namespace wal {
+
 std::unordered_map<int, std::string> err_msg_map({
   #define ERROR_CODE_DEF(code, name, str) {code, str}
   #include "common/error_code_def.h"
@@ -15,6 +16,10 @@ std::string ToErrorMessage(ErrorCode error_code) {
     return "";
   }
   return err_msg_map[int(error_code)];
+}
+
+ErrorCode Ok() {
+  return ErrorCode::kOk;
 }
 
 }  // namespace wal

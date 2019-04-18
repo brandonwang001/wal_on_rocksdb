@@ -17,10 +17,18 @@
 #include <google/protobuf/port_def.inc>
 
 namespace wal {
+class WalRecordDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<WalRecord> _instance;
+} _WalRecord_default_instance_;
 class WalStreamMetaDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<WalStreamMeta> _instance;
 } _WalStreamMeta_default_instance_;
+class WalStreamNextLogIdMetaDefaultTypeInternal {
+ public:
+  ::google::protobuf::internal::ExplicitlyConstructed<WalStreamNextLogIdMeta> _instance;
+} _WalStreamNextLogIdMeta_default_instance_;
 class WalStreamLowerBoundMetaDefaultTypeInternal {
  public:
   ::google::protobuf::internal::ExplicitlyConstructed<WalStreamLowerBoundMeta> _instance;
@@ -30,6 +38,20 @@ class WalStreamUpperBoundMetaDefaultTypeInternal {
   ::google::protobuf::internal::ExplicitlyConstructed<WalStreamUpperBoundMeta> _instance;
 } _WalStreamUpperBoundMeta_default_instance_;
 }  // namespace wal
+static void InitDefaultsWalRecord_wal_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::wal::_WalRecord_default_instance_;
+    new (ptr) ::wal::WalRecord();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::wal::WalRecord::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_WalRecord_wal_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsWalRecord_wal_2eproto}, {}};
+
 static void InitDefaultsWalStreamMeta_wal_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -43,6 +65,20 @@ static void InitDefaultsWalStreamMeta_wal_2eproto() {
 
 ::google::protobuf::internal::SCCInfo<0> scc_info_WalStreamMeta_wal_2eproto =
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsWalStreamMeta_wal_2eproto}, {}};
+
+static void InitDefaultsWalStreamNextLogIdMeta_wal_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::wal::_WalStreamNextLogIdMeta_default_instance_;
+    new (ptr) ::wal::WalStreamNextLogIdMeta();
+    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::wal::WalStreamNextLogIdMeta::InitAsDefaultInstance();
+}
+
+::google::protobuf::internal::SCCInfo<0> scc_info_WalStreamNextLogIdMeta_wal_2eproto =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsWalStreamNextLogIdMeta_wal_2eproto}, {}};
 
 static void InitDefaultsWalStreamLowerBoundMeta_wal_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -73,16 +109,27 @@ static void InitDefaultsWalStreamUpperBoundMeta_wal_2eproto() {
     {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsWalStreamUpperBoundMeta_wal_2eproto}, {}};
 
 void InitDefaults_wal_2eproto() {
+  ::google::protobuf::internal::InitSCC(&scc_info_WalRecord_wal_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_WalStreamMeta_wal_2eproto.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_WalStreamNextLogIdMeta_wal_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_WalStreamLowerBoundMeta_wal_2eproto.base);
   ::google::protobuf::internal::InitSCC(&scc_info_WalStreamUpperBoundMeta_wal_2eproto.base);
 }
 
-::google::protobuf::Metadata file_level_metadata_wal_2eproto[3];
+::google::protobuf::Metadata file_level_metadata_wal_2eproto[5];
 constexpr ::google::protobuf::EnumDescriptor const** file_level_enum_descriptors_wal_2eproto = nullptr;
 constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_wal_2eproto = nullptr;
 
 const ::google::protobuf::uint32 TableStruct_wal_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+  PROTOBUF_FIELD_OFFSET(::wal::WalRecord, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::wal::WalRecord, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::wal::WalRecord, term_),
+  PROTOBUF_FIELD_OFFSET(::wal::WalRecord, log_),
+  1,
+  0,
   PROTOBUF_FIELD_OFFSET(::wal::WalStreamMeta, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::wal::WalStreamMeta, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -90,6 +137,13 @@ const ::google::protobuf::uint32 TableStruct_wal_2eproto::offsets[] PROTOBUF_SEC
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::wal::WalStreamMeta, stream_uuids_),
   ~0u,
+  PROTOBUF_FIELD_OFFSET(::wal::WalStreamNextLogIdMeta, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::wal::WalStreamNextLogIdMeta, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::wal::WalStreamNextLogIdMeta, next_log_id_),
+  0,
   PROTOBUF_FIELD_OFFSET(::wal::WalStreamLowerBoundMeta, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::wal::WalStreamLowerBoundMeta, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -106,13 +160,17 @@ const ::google::protobuf::uint32 TableStruct_wal_2eproto::offsets[] PROTOBUF_SEC
   0,
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 6, sizeof(::wal::WalStreamMeta)},
-  { 7, 13, sizeof(::wal::WalStreamLowerBoundMeta)},
-  { 14, 20, sizeof(::wal::WalStreamUpperBoundMeta)},
+  { 0, 7, sizeof(::wal::WalRecord)},
+  { 9, 15, sizeof(::wal::WalStreamMeta)},
+  { 16, 22, sizeof(::wal::WalStreamNextLogIdMeta)},
+  { 23, 29, sizeof(::wal::WalStreamLowerBoundMeta)},
+  { 30, 36, sizeof(::wal::WalStreamUpperBoundMeta)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::google::protobuf::Message*>(&::wal::_WalRecord_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::wal::_WalStreamMeta_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&::wal::_WalStreamNextLogIdMeta_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::wal::_WalStreamLowerBoundMeta_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::wal::_WalStreamUpperBoundMeta_default_instance_),
 };
@@ -120,19 +178,21 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 ::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_wal_2eproto = {
   {}, AddDescriptors_wal_2eproto, "wal.proto", schemas,
   file_default_instances, TableStruct_wal_2eproto::offsets,
-  file_level_metadata_wal_2eproto, 3, file_level_enum_descriptors_wal_2eproto, file_level_service_descriptors_wal_2eproto,
+  file_level_metadata_wal_2eproto, 5, file_level_enum_descriptors_wal_2eproto, file_level_service_descriptors_wal_2eproto,
 };
 
 const char descriptor_table_protodef_wal_2eproto[] =
-  "\n\twal.proto\022\003wal\"%\n\rWalStreamMeta\022\024\n\014str"
-  "eam_uuids\030\001 \003(\014\".\n\027WalStreamLowerBoundMe"
-  "ta\022\023\n\013lower_bound\030\001 \001(\004\".\n\027WalStreamUppe"
-  "rBoundMeta\022\023\n\013upper_bound\030\002 \001(\004"
+  "\n\twal.proto\022\003wal\"&\n\tWalRecord\022\014\n\004term\030\001 "
+  "\001(\003\022\013\n\003log\030\002 \001(\014\"%\n\rWalStreamMeta\022\024\n\014str"
+  "eam_uuids\030\001 \003(\014\"-\n\026WalStreamNextLogIdMet"
+  "a\022\023\n\013next_log_id\030\001 \001(\004\".\n\027WalStreamLower"
+  "BoundMeta\022\023\n\013lower_bound\030\001 \001(\004\".\n\027WalStr"
+  "eamUpperBoundMeta\022\023\n\013upper_bound\030\002 \001(\004"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_wal_2eproto = {
   false, InitDefaults_wal_2eproto, 
   descriptor_table_protodef_wal_2eproto,
-  "wal.proto", &assign_descriptors_table_wal_2eproto, 151,
+  "wal.proto", &assign_descriptors_table_wal_2eproto, 238,
 };
 
 void AddDescriptors_wal_2eproto() {
@@ -145,6 +205,356 @@ void AddDescriptors_wal_2eproto() {
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_wal_2eproto = []() { AddDescriptors_wal_2eproto(); return true; }();
 namespace wal {
+
+// ===================================================================
+
+void WalRecord::InitAsDefaultInstance() {
+}
+class WalRecord::HasBitSetters {
+ public:
+  static void set_has_term(WalRecord* msg) {
+    msg->_has_bits_[0] |= 0x00000002u;
+  }
+  static void set_has_log(WalRecord* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int WalRecord::kTermFieldNumber;
+const int WalRecord::kLogFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+WalRecord::WalRecord()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:wal.WalRecord)
+}
+WalRecord::WalRecord(const WalRecord& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  log_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.has_log()) {
+    log_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.log_);
+  }
+  term_ = from.term_;
+  // @@protoc_insertion_point(copy_constructor:wal.WalRecord)
+}
+
+void WalRecord::SharedCtor() {
+  ::google::protobuf::internal::InitSCC(
+      &scc_info_WalRecord_wal_2eproto.base);
+  log_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  term_ = PROTOBUF_LONGLONG(0);
+}
+
+WalRecord::~WalRecord() {
+  // @@protoc_insertion_point(destructor:wal.WalRecord)
+  SharedDtor();
+}
+
+void WalRecord::SharedDtor() {
+  log_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void WalRecord::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const WalRecord& WalRecord::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_WalRecord_wal_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void WalRecord::Clear() {
+// @@protoc_insertion_point(message_clear_start:wal.WalRecord)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    log_.ClearNonDefaultToEmptyNoArena();
+  }
+  term_ = PROTOBUF_LONGLONG(0);
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* WalRecord::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<WalRecord*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // optional int64 term = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_term(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      // optional bytes log = 2;
+      case 2: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        object = msg->mutable_log();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParser;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheck(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+string_till_end:
+  static_cast<::std::string*>(object)->clear();
+  static_cast<::std::string*>(object)->reserve(size);
+  goto len_delim_till_end;
+len_delim_till_end:
+  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
+                               {parser_till_end, object}, size);
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool WalRecord::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:wal.WalRecord)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional int64 term = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          HasBitSetters::set_has_term(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &term_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // optional bytes log = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_log()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:wal.WalRecord)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:wal.WalRecord)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void WalRecord::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:wal.WalRecord)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional int64 term = 1;
+  if (cached_has_bits & 0x00000002u) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->term(), output);
+  }
+
+  // optional bytes log = 2;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      2, this->log(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:wal.WalRecord)
+}
+
+::google::protobuf::uint8* WalRecord::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:wal.WalRecord)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional int64 term = 1;
+  if (cached_has_bits & 0x00000002u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->term(), target);
+  }
+
+  // optional bytes log = 2;
+  if (cached_has_bits & 0x00000001u) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        2, this->log(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:wal.WalRecord)
+  return target;
+}
+
+size_t WalRecord::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:wal.WalRecord)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // optional bytes log = 2;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->log());
+    }
+
+    // optional int64 term = 1;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->term());
+    }
+
+  }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void WalRecord::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:wal.WalRecord)
+  GOOGLE_DCHECK_NE(&from, this);
+  const WalRecord* source =
+      ::google::protobuf::DynamicCastToGenerated<WalRecord>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:wal.WalRecord)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:wal.WalRecord)
+    MergeFrom(*source);
+  }
+}
+
+void WalRecord::MergeFrom(const WalRecord& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:wal.WalRecord)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _has_bits_[0] |= 0x00000001u;
+      log_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.log_);
+    }
+    if (cached_has_bits & 0x00000002u) {
+      term_ = from.term_;
+    }
+    _has_bits_[0] |= cached_has_bits;
+  }
+}
+
+void WalRecord::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:wal.WalRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void WalRecord::CopyFrom(const WalRecord& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:wal.WalRecord)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool WalRecord::IsInitialized() const {
+  return true;
+}
+
+void WalRecord::Swap(WalRecord* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void WalRecord::InternalSwap(WalRecord* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  log_.Swap(&other->log_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  swap(term_, other->term_);
+}
+
+::google::protobuf::Metadata WalRecord::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_wal_2eproto);
+  return ::file_level_metadata_wal_2eproto[kIndexInFileMessages];
+}
+
 
 // ===================================================================
 
@@ -422,6 +832,275 @@ void WalStreamMeta::InternalSwap(WalStreamMeta* other) {
 }
 
 ::google::protobuf::Metadata WalStreamMeta::GetMetadata() const {
+  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_wal_2eproto);
+  return ::file_level_metadata_wal_2eproto[kIndexInFileMessages];
+}
+
+
+// ===================================================================
+
+void WalStreamNextLogIdMeta::InitAsDefaultInstance() {
+}
+class WalStreamNextLogIdMeta::HasBitSetters {
+ public:
+  static void set_has_next_log_id(WalStreamNextLogIdMeta* msg) {
+    msg->_has_bits_[0] |= 0x00000001u;
+  }
+};
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int WalStreamNextLogIdMeta::kNextLogIdFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+WalStreamNextLogIdMeta::WalStreamNextLogIdMeta()
+  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:wal.WalStreamNextLogIdMeta)
+}
+WalStreamNextLogIdMeta::WalStreamNextLogIdMeta(const WalStreamNextLogIdMeta& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(nullptr),
+      _has_bits_(from._has_bits_) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  next_log_id_ = from.next_log_id_;
+  // @@protoc_insertion_point(copy_constructor:wal.WalStreamNextLogIdMeta)
+}
+
+void WalStreamNextLogIdMeta::SharedCtor() {
+  next_log_id_ = PROTOBUF_ULONGLONG(0);
+}
+
+WalStreamNextLogIdMeta::~WalStreamNextLogIdMeta() {
+  // @@protoc_insertion_point(destructor:wal.WalStreamNextLogIdMeta)
+  SharedDtor();
+}
+
+void WalStreamNextLogIdMeta::SharedDtor() {
+}
+
+void WalStreamNextLogIdMeta::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const WalStreamNextLogIdMeta& WalStreamNextLogIdMeta::default_instance() {
+  ::google::protobuf::internal::InitSCC(&::scc_info_WalStreamNextLogIdMeta_wal_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void WalStreamNextLogIdMeta::Clear() {
+// @@protoc_insertion_point(message_clear_start:wal.WalStreamNextLogIdMeta)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  next_log_id_ = PROTOBUF_ULONGLONG(0);
+  _has_bits_.Clear();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* WalStreamNextLogIdMeta::_InternalParse(const char* begin, const char* end, void* object,
+                  ::google::protobuf::internal::ParseContext* ctx) {
+  auto msg = static_cast<WalStreamNextLogIdMeta*>(object);
+  ::google::protobuf::int32 size; (void)size;
+  int depth; (void)depth;
+  ::google::protobuf::uint32 tag;
+  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
+  auto ptr = begin;
+  while (ptr < end) {
+    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
+    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    switch (tag >> 3) {
+      // optional uint64 next_log_id = 1;
+      case 1: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
+        msg->set_next_log_id(::google::protobuf::internal::ReadVarint(&ptr));
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        break;
+      }
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->EndGroup(tag);
+          return ptr;
+        }
+        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
+          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
+        ptr = res.first;
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        if (res.second) return ptr;
+      }
+    }  // switch
+  }  // while
+  return ptr;
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool WalStreamNextLogIdMeta::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:wal.WalStreamNextLogIdMeta)
+  for (;;) {
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint64 next_log_id = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
+          HasBitSetters::set_has_next_log_id(this);
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &next_log_id_)));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:wal.WalStreamNextLogIdMeta)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:wal.WalStreamNextLogIdMeta)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void WalStreamNextLogIdMeta::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:wal.WalStreamNextLogIdMeta)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional uint64 next_log_id = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(1, this->next_log_id(), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:wal.WalStreamNextLogIdMeta)
+}
+
+::google::protobuf::uint8* WalStreamNextLogIdMeta::InternalSerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:wal.WalStreamNextLogIdMeta)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  // optional uint64 next_log_id = 1;
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(1, this->next_log_id(), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:wal.WalStreamNextLogIdMeta)
+  return target;
+}
+
+size_t WalStreamNextLogIdMeta::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:wal.WalStreamNextLogIdMeta)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // optional uint64 next_log_id = 1;
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->next_log_id());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void WalStreamNextLogIdMeta::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:wal.WalStreamNextLogIdMeta)
+  GOOGLE_DCHECK_NE(&from, this);
+  const WalStreamNextLogIdMeta* source =
+      ::google::protobuf::DynamicCastToGenerated<WalStreamNextLogIdMeta>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:wal.WalStreamNextLogIdMeta)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:wal.WalStreamNextLogIdMeta)
+    MergeFrom(*source);
+  }
+}
+
+void WalStreamNextLogIdMeta::MergeFrom(const WalStreamNextLogIdMeta& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:wal.WalStreamNextLogIdMeta)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from.has_next_log_id()) {
+    set_next_log_id(from.next_log_id());
+  }
+}
+
+void WalStreamNextLogIdMeta::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:wal.WalStreamNextLogIdMeta)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void WalStreamNextLogIdMeta::CopyFrom(const WalStreamNextLogIdMeta& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:wal.WalStreamNextLogIdMeta)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool WalStreamNextLogIdMeta::IsInitialized() const {
+  return true;
+}
+
+void WalStreamNextLogIdMeta::Swap(WalStreamNextLogIdMeta* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void WalStreamNextLogIdMeta::InternalSwap(WalStreamNextLogIdMeta* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(next_log_id_, other->next_log_id_);
+}
+
+::google::protobuf::Metadata WalStreamNextLogIdMeta::GetMetadata() const {
   ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_wal_2eproto);
   return ::file_level_metadata_wal_2eproto[kIndexInFileMessages];
 }
@@ -969,8 +1648,14 @@ void WalStreamUpperBoundMeta::InternalSwap(WalStreamUpperBoundMeta* other) {
 }  // namespace wal
 namespace google {
 namespace protobuf {
+template<> PROTOBUF_NOINLINE ::wal::WalRecord* Arena::CreateMaybeMessage< ::wal::WalRecord >(Arena* arena) {
+  return Arena::CreateInternal< ::wal::WalRecord >(arena);
+}
 template<> PROTOBUF_NOINLINE ::wal::WalStreamMeta* Arena::CreateMaybeMessage< ::wal::WalStreamMeta >(Arena* arena) {
   return Arena::CreateInternal< ::wal::WalStreamMeta >(arena);
+}
+template<> PROTOBUF_NOINLINE ::wal::WalStreamNextLogIdMeta* Arena::CreateMaybeMessage< ::wal::WalStreamNextLogIdMeta >(Arena* arena) {
+  return Arena::CreateInternal< ::wal::WalStreamNextLogIdMeta >(arena);
 }
 template<> PROTOBUF_NOINLINE ::wal::WalStreamLowerBoundMeta* Arena::CreateMaybeMessage< ::wal::WalStreamLowerBoundMeta >(Arena* arena) {
   return Arena::CreateInternal< ::wal::WalStreamLowerBoundMeta >(arena);

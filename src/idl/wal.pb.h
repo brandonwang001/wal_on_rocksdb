@@ -41,7 +41,7 @@ struct TableStruct_wal_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::google::protobuf::internal::ParseTable schema[3]
+  static const ::google::protobuf::internal::ParseTable schema[5]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::google::protobuf::internal::FieldMetadata field_metadata[];
   static const ::google::protobuf::internal::SerializationTable serialization_table[];
@@ -49,26 +49,171 @@ struct TableStruct_wal_2eproto {
 };
 void AddDescriptors_wal_2eproto();
 namespace wal {
+class WalRecord;
+class WalRecordDefaultTypeInternal;
+extern WalRecordDefaultTypeInternal _WalRecord_default_instance_;
 class WalStreamLowerBoundMeta;
 class WalStreamLowerBoundMetaDefaultTypeInternal;
 extern WalStreamLowerBoundMetaDefaultTypeInternal _WalStreamLowerBoundMeta_default_instance_;
 class WalStreamMeta;
 class WalStreamMetaDefaultTypeInternal;
 extern WalStreamMetaDefaultTypeInternal _WalStreamMeta_default_instance_;
+class WalStreamNextLogIdMeta;
+class WalStreamNextLogIdMetaDefaultTypeInternal;
+extern WalStreamNextLogIdMetaDefaultTypeInternal _WalStreamNextLogIdMeta_default_instance_;
 class WalStreamUpperBoundMeta;
 class WalStreamUpperBoundMetaDefaultTypeInternal;
 extern WalStreamUpperBoundMetaDefaultTypeInternal _WalStreamUpperBoundMeta_default_instance_;
 }  // namespace wal
 namespace google {
 namespace protobuf {
+template<> ::wal::WalRecord* Arena::CreateMaybeMessage<::wal::WalRecord>(Arena*);
 template<> ::wal::WalStreamLowerBoundMeta* Arena::CreateMaybeMessage<::wal::WalStreamLowerBoundMeta>(Arena*);
 template<> ::wal::WalStreamMeta* Arena::CreateMaybeMessage<::wal::WalStreamMeta>(Arena*);
+template<> ::wal::WalStreamNextLogIdMeta* Arena::CreateMaybeMessage<::wal::WalStreamNextLogIdMeta>(Arena*);
 template<> ::wal::WalStreamUpperBoundMeta* Arena::CreateMaybeMessage<::wal::WalStreamUpperBoundMeta>(Arena*);
 }  // namespace protobuf
 }  // namespace google
 namespace wal {
 
 // ===================================================================
+
+class WalRecord :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:wal.WalRecord) */ {
+ public:
+  WalRecord();
+  virtual ~WalRecord();
+
+  WalRecord(const WalRecord& from);
+
+  inline WalRecord& operator=(const WalRecord& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  WalRecord(WalRecord&& from) noexcept
+    : WalRecord() {
+    *this = ::std::move(from);
+  }
+
+  inline WalRecord& operator=(WalRecord&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const WalRecord& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const WalRecord* internal_default_instance() {
+    return reinterpret_cast<const WalRecord*>(
+               &_WalRecord_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  void Swap(WalRecord* other);
+  friend void swap(WalRecord& a, WalRecord& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline WalRecord* New() const final {
+    return CreateMaybeMessage<WalRecord>(nullptr);
+  }
+
+  WalRecord* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<WalRecord>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const WalRecord& from);
+  void MergeFrom(const WalRecord& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(WalRecord* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional bytes log = 2;
+  bool has_log() const;
+  void clear_log();
+  static const int kLogFieldNumber = 2;
+  const ::std::string& log() const;
+  void set_log(const ::std::string& value);
+  #if LANG_CXX11
+  void set_log(::std::string&& value);
+  #endif
+  void set_log(const char* value);
+  void set_log(const void* value, size_t size);
+  ::std::string* mutable_log();
+  ::std::string* release_log();
+  void set_allocated_log(::std::string* log);
+
+  // optional int64 term = 1;
+  bool has_term() const;
+  void clear_term();
+  static const int kTermFieldNumber = 1;
+  ::google::protobuf::int64 term() const;
+  void set_term(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:wal.WalRecord)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::internal::ArenaStringPtr log_;
+  ::google::protobuf::int64 term_;
+  friend struct ::TableStruct_wal_2eproto;
+};
+// -------------------------------------------------------------------
 
 class WalStreamMeta :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:wal.WalStreamMeta) */ {
@@ -115,7 +260,7 @@ class WalStreamMeta :
                &_WalStreamMeta_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   void Swap(WalStreamMeta* other);
   friend void swap(WalStreamMeta& a, WalStreamMeta& b) {
@@ -206,6 +351,127 @@ class WalStreamMeta :
 };
 // -------------------------------------------------------------------
 
+class WalStreamNextLogIdMeta :
+    public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:wal.WalStreamNextLogIdMeta) */ {
+ public:
+  WalStreamNextLogIdMeta();
+  virtual ~WalStreamNextLogIdMeta();
+
+  WalStreamNextLogIdMeta(const WalStreamNextLogIdMeta& from);
+
+  inline WalStreamNextLogIdMeta& operator=(const WalStreamNextLogIdMeta& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  WalStreamNextLogIdMeta(WalStreamNextLogIdMeta&& from) noexcept
+    : WalStreamNextLogIdMeta() {
+    *this = ::std::move(from);
+  }
+
+  inline WalStreamNextLogIdMeta& operator=(WalStreamNextLogIdMeta&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields();
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return default_instance().GetDescriptor();
+  }
+  static const WalStreamNextLogIdMeta& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const WalStreamNextLogIdMeta* internal_default_instance() {
+    return reinterpret_cast<const WalStreamNextLogIdMeta*>(
+               &_WalStreamNextLogIdMeta_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  void Swap(WalStreamNextLogIdMeta* other);
+  friend void swap(WalStreamNextLogIdMeta& a, WalStreamNextLogIdMeta& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline WalStreamNextLogIdMeta* New() const final {
+    return CreateMaybeMessage<WalStreamNextLogIdMeta>(nullptr);
+  }
+
+  WalStreamNextLogIdMeta* New(::google::protobuf::Arena* arena) const final {
+    return CreateMaybeMessage<WalStreamNextLogIdMeta>(arena);
+  }
+  void CopyFrom(const ::google::protobuf::Message& from) final;
+  void MergeFrom(const ::google::protobuf::Message& from) final;
+  void CopyFrom(const WalStreamNextLogIdMeta& from);
+  void MergeFrom(const WalStreamNextLogIdMeta& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  static const char* _InternalParse(const char* begin, const char* end, void* object, ::google::protobuf::internal::ParseContext* ctx);
+  ::google::protobuf::internal::ParseFunc _ParseFunc() const final { return _InternalParse; }
+  #else
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const final;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      ::google::protobuf::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(WalStreamNextLogIdMeta* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint64 next_log_id = 1;
+  bool has_next_log_id() const;
+  void clear_next_log_id();
+  static const int kNextLogIdFieldNumber = 1;
+  ::google::protobuf::uint64 next_log_id() const;
+  void set_next_log_id(::google::protobuf::uint64 value);
+
+  // @@protoc_insertion_point(class_scope:wal.WalStreamNextLogIdMeta)
+ private:
+  class HasBitSetters;
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::HasBits<1> _has_bits_;
+  mutable ::google::protobuf::internal::CachedSize _cached_size_;
+  ::google::protobuf::uint64 next_log_id_;
+  friend struct ::TableStruct_wal_2eproto;
+};
+// -------------------------------------------------------------------
+
 class WalStreamLowerBoundMeta :
     public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:wal.WalStreamLowerBoundMeta) */ {
  public:
@@ -251,7 +517,7 @@ class WalStreamLowerBoundMeta :
                &_WalStreamLowerBoundMeta_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    3;
 
   void Swap(WalStreamLowerBoundMeta* other);
   friend void swap(WalStreamLowerBoundMeta& a, WalStreamLowerBoundMeta& b) {
@@ -372,7 +638,7 @@ class WalStreamUpperBoundMeta :
                &_WalStreamUpperBoundMeta_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    4;
 
   void Swap(WalStreamUpperBoundMeta* other);
   friend void swap(WalStreamUpperBoundMeta& a, WalStreamUpperBoundMeta& b) {
@@ -455,6 +721,88 @@ class WalStreamUpperBoundMeta :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// WalRecord
+
+// optional int64 term = 1;
+inline bool WalRecord::has_term() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void WalRecord::clear_term() {
+  term_ = PROTOBUF_LONGLONG(0);
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::google::protobuf::int64 WalRecord::term() const {
+  // @@protoc_insertion_point(field_get:wal.WalRecord.term)
+  return term_;
+}
+inline void WalRecord::set_term(::google::protobuf::int64 value) {
+  _has_bits_[0] |= 0x00000002u;
+  term_ = value;
+  // @@protoc_insertion_point(field_set:wal.WalRecord.term)
+}
+
+// optional bytes log = 2;
+inline bool WalRecord::has_log() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void WalRecord::clear_log() {
+  log_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline const ::std::string& WalRecord::log() const {
+  // @@protoc_insertion_point(field_get:wal.WalRecord.log)
+  return log_.GetNoArena();
+}
+inline void WalRecord::set_log(const ::std::string& value) {
+  _has_bits_[0] |= 0x00000001u;
+  log_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:wal.WalRecord.log)
+}
+#if LANG_CXX11
+inline void WalRecord::set_log(::std::string&& value) {
+  _has_bits_[0] |= 0x00000001u;
+  log_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:wal.WalRecord.log)
+}
+#endif
+inline void WalRecord::set_log(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _has_bits_[0] |= 0x00000001u;
+  log_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:wal.WalRecord.log)
+}
+inline void WalRecord::set_log(const void* value, size_t size) {
+  _has_bits_[0] |= 0x00000001u;
+  log_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:wal.WalRecord.log)
+}
+inline ::std::string* WalRecord::mutable_log() {
+  _has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_mutable:wal.WalRecord.log)
+  return log_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* WalRecord::release_log() {
+  // @@protoc_insertion_point(field_release:wal.WalRecord.log)
+  if (!has_log()) {
+    return nullptr;
+  }
+  _has_bits_[0] &= ~0x00000001u;
+  return log_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void WalRecord::set_allocated_log(::std::string* log) {
+  if (log != nullptr) {
+    _has_bits_[0] |= 0x00000001u;
+  } else {
+    _has_bits_[0] &= ~0x00000001u;
+  }
+  log_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), log);
+  // @@protoc_insertion_point(field_set_allocated:wal.WalRecord.log)
+}
+
+// -------------------------------------------------------------------
+
 // WalStreamMeta
 
 // repeated bytes stream_uuids = 1;
@@ -528,6 +876,28 @@ WalStreamMeta::mutable_stream_uuids() {
 
 // -------------------------------------------------------------------
 
+// WalStreamNextLogIdMeta
+
+// optional uint64 next_log_id = 1;
+inline bool WalStreamNextLogIdMeta::has_next_log_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void WalStreamNextLogIdMeta::clear_next_log_id() {
+  next_log_id_ = PROTOBUF_ULONGLONG(0);
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline ::google::protobuf::uint64 WalStreamNextLogIdMeta::next_log_id() const {
+  // @@protoc_insertion_point(field_get:wal.WalStreamNextLogIdMeta.next_log_id)
+  return next_log_id_;
+}
+inline void WalStreamNextLogIdMeta::set_next_log_id(::google::protobuf::uint64 value) {
+  _has_bits_[0] |= 0x00000001u;
+  next_log_id_ = value;
+  // @@protoc_insertion_point(field_set:wal.WalStreamNextLogIdMeta.next_log_id)
+}
+
+// -------------------------------------------------------------------
+
 // WalStreamLowerBoundMeta
 
 // optional uint64 lower_bound = 1;
@@ -573,6 +943,10 @@ inline void WalStreamUpperBoundMeta::set_upper_bound(::google::protobuf::uint64 
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -15,7 +15,10 @@ struct WalStreamInf {
       const std::string& log) = 0;
   // Get log
   virtual Error GetLog(int64_t log_id,
+      int64_t* term,
       std::string* log) = 0;
+  // Get the next id of log
+  virtual Error GetNextLogId(int64_t* log_id) = 0;
   // Get the id of last log
   virtual Error GetLastLogId(int64_t* log_id) = 0;
   // Get the id of first log
