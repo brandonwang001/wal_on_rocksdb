@@ -65,6 +65,7 @@ Error WalStream::AppendLog(int64_t log_id,
   ret = AssembleData(log_id, term, log,
       &key, &value);
   IF_NOT_OK_RETURN(ret);
+  LOG(INFO) << "log_id : " << log_id;
   batchs.emplace_back(std::tuple<BatchWriteType,
       std::string, std::string>(
       BatchWriteType::kPut, key, value));
@@ -187,7 +188,7 @@ Error WalStream::Truncate(int64_t log_id) {
     ret = DeleteTo(upper_bound);
     IF_NOT_OK_RETURN(ret);
   } else {
-    ret = DeleteTo(log_id);
+    ret = DeleteFrom(log_id);
     IF_NOT_OK_RETURN(ret);
   }
   RETURN_OK();
