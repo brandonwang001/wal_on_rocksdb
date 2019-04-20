@@ -29,9 +29,16 @@ Error WalStream::Init() {
   if (ret1 == ErrorCode::kKeyNotExist &&
       ret2 == ErrorCode::kKeyNotExist &&
       ret3 == ErrorCode::kKeyNotExist) {
+    next_log_id = 1;
     auto ret = WriteMeta(lower_bound,
         upper_bound, next_log_id);
     IF_NOT_OK_RETURN(ret);
+  } else if (ret1 == Ok() && ret2 == Ok()
+      & ret3 == Ok()) {
+      LOG(INFO) << "start rocksdb succ, " 
+          << "lower_bound : " << lower_bound << " "
+          << "upper_bound : " << upper_bound << " "
+          << "next_log_id : " << next_log_id;
   } else {
     LOG(FATAL) << ret1.ToString() << " "
         << ret2.ToString() << " "
@@ -50,11 +57,22 @@ Error WalStream::AppendLog(int64_t log_id,
   auto ret = ReadMeta(&log_id_lower_bound,
       &log_id_upper_bound,
       &next_log_id);
+  LOG(INFO) << "log_id_lower_bound : " << log_id_lower_bound;
+  LOG(INFO) << "log_id_upper_bound : " << log_id_upper_bound;
+  LOG(INFO) << "next_log_id : " << next_log_id;
   IF_NOT_OK_RETURN(ret);
   std::vector<std::tuple<BatchWriteType,
       std::string, std::string>> batchs;
   std::string key;
   std::string value;
+  ret = AssembleData(log_id, term, log,
+      &key, &value);
+  IF_NOT_OK_RETURN(ret);
+  batchs.emplace_back(std::tuple<BatchWriteType,
+      std::string, std::string>(
+      BatchWriteType::kPut, key, value)); 
+  key.clear();
+  value.clear();
   ret = AssembleUpperBoundMeta(
       next_log_id, &key, &value); 
   IF_NOT_OK_RETURN(ret);

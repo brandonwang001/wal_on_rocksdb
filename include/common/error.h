@@ -58,6 +58,7 @@ do { \
 #define IF_NOT_OK_RETURN(ret) \
 do { \
   if (ret != Ok()) { \
+    LOG(ERROR) << ret.ToString(); \
     return ret; \
   } \
 } while (false)
