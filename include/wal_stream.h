@@ -22,12 +22,6 @@ enum class BatchWriteType : int {
   kDelete = 2,
 };
 
-struct WalStreamOptions {
- public:
-  rocksdb::DB* db_;
-  std::string stream_uuid_;
-};
-
 class WalStream : public WalStreamInf {
  public:
   const std::string kLowerBoundMetaSuffix = "lowerbound";
@@ -37,11 +31,10 @@ class WalStream : public WalStreamInf {
   ~WalStream() override {
   }
 
-  WalStream(const WalStreamOptions& options)
-      : options_(options) {
-    CHECK(options_.db_);
-    db_ = options_.db_;
-    stream_uuid_ = options_.stream_uuid_;
+  WalStream(const std::string& stream_uuid,
+      const std::string& dir) {
+    stream_uuid_ = stream_uuid;
+    dir_ = dir;
   }
  
   Error Init();
@@ -112,9 +105,9 @@ class WalStream : public WalStreamInf {
       std::string* key, std::string* value);
 
   std::mutex mutex_;
-  WalStreamOptions options_;
   rocksdb::DB* db_;
   std::string stream_uuid_;
+  std::string dir_;
 };
 
 }  // namespace rocksdb_wal

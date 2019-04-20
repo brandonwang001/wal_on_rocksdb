@@ -10,6 +10,33 @@
 namespace wal {
 
 Error WalStream::Init() {
+  rocksdb::Options options;
+  options.IncreaseParallelism();
+  options.OptimizeLevelStyleCompaction();
+  options.create_if_missing = true;
+  auto path = dir_ + "/" + stream_uuid_;
+  auto status = rocksdb::DB::Open(
+      options, path, &db_);
+  if (!status.ok()) {
+    RETURN_NOT_OK(ErrorCode::kRocksDBOpenFailed);
+  }
+  int64_t lower_bound = 0;
+  int64_t upper_bound = 0;
+  int64_t next_log_id = 0;
+  auto ret1 = GetLogIdLowerBound(&lower_bound);
+  auto ret2 = GetLogIdUpperBound(&upper_bound);
+  auto ret3 = GetNextLogIdInner(&next_log_id);
+  if (ret1 == ErrorCode::kKeyNotExist &&
+      ret2 == ErrorCode::kKeyNotExist &&
+      ret3 == ErrorCode::kKeyNotExist) {
+    auto ret = WriteMeta(lower_bound,
+        upper_bound, next_log_id);
+    IF_NOT_OK_RETURN(ret);
+  } else {
+    LOG(FATAL) << ret1.ToString() << " "
+        << ret2.ToString() << " "
+        << ret3.ToString(); 
+  }
   RETURN_OK();
 }
 
@@ -124,6 +151,20 @@ Error WalStream::Truncate(int64_t log_id) {
   std::lock_guard<std:: mutex> lock(mutex_);
   int64_t lower_bound = 0;
   int64_t upper_bound = 0;
+  int64_t next_log_id = 0;
+  auto ret = ReadMeta(&lower_bound, &upper_bound,
+      &next_log_id);
+  IF_NOT_OK_RETURN(ret);
+  if (log_id < lower_bound) {
+    ret = DeleteFrom(lower_bound);
+    IF_NOT_OK_RETURN(ret);
+  } else if (log_id > upper_bound) {
+    ret = DeleteTo(upper_bound);
+    IF_NOT_OK_RETURN(ret);
+  } else {
+    ret = DeleteTo(log_id);
+    IF_NOT_OK_RETURN(ret);
+  }
   RETURN_OK();
 }
 
@@ -343,8 +384,11 @@ Error WalStream::ReadKey(const std::string& key,
     std::string* value) {
   auto status = db_->Get(rocksdb::ReadOptions(),
       key, value);
-  if (!status.ok()) {
+  if (!status.ok() && !status.IsNotFound()) {
     RETURN_NOT_OK(ErrorCode::kRocksDBGetFailed);
+  }
+  if (status.IsNotFound()) {
+    RETURN_NOT_OK(ErrorCode::kKeyNotExist);
   }
   RETURN_OK();
 }
