@@ -57,9 +57,6 @@ Error WalStream::AppendLog(int64_t log_id,
   auto ret = ReadMeta(&log_id_lower_bound,
       &log_id_upper_bound,
       &next_log_id);
-  LOG(INFO) << "log_id_lower_bound : " << log_id_lower_bound;
-  LOG(INFO) << "log_id_upper_bound : " << log_id_upper_bound;
-  LOG(INFO) << "next_log_id : " << next_log_id;
   IF_NOT_OK_RETURN(ret);
   std::vector<std::tuple<BatchWriteType,
       std::string, std::string>> batchs;
@@ -70,7 +67,17 @@ Error WalStream::AppendLog(int64_t log_id,
   IF_NOT_OK_RETURN(ret);
   batchs.emplace_back(std::tuple<BatchWriteType,
       std::string, std::string>(
-      BatchWriteType::kPut, key, value)); 
+      BatchWriteType::kPut, key, value));
+  if (log_id_lower_bound == 0 && next_log_id == 1) {
+    key.clear();
+    value.clear();
+    ret = AssembleLowerBoundMeta(next_log_id,
+        &key, &value);
+    IF_NOT_OK_RETURN(ret);
+    batchs.emplace_back(std::tuple<BatchWriteType,
+        std::string, std::string>(
+        BatchWriteType::kPut, key, value));
+  } 
   key.clear();
   value.clear();
   ret = AssembleUpperBoundMeta(
@@ -456,8 +463,8 @@ Error WalStream::GetNextLogIdInner(int64_t* log_id) {
 Error WalStream::AssembleLowerBoundMeta(int64_t log_id,
     std::string* key, std::string* value) {
   *key = stream_uuid_ + "_" + kLowerBoundMetaSuffix;
-  WalStreamUpperBoundMeta meta;
-  meta.set_upper_bound(log_id);
+  WalStreamLowerBoundMeta meta;
+  meta.set_lower_bound(log_id);
   auto succ = meta.AppendToString(value);
   if (!succ) {
     RETURN_NOT_OK(ErrorCode::kSerializeFailed);
@@ -468,8 +475,8 @@ Error WalStream::AssembleLowerBoundMeta(int64_t log_id,
 Error WalStream::AssembleUpperBoundMeta(int64_t log_id,
     std::string* key, std::string* value) {
   *key = stream_uuid_ + "_" + kUpperBoundMetaSuffix;
-  WalStreamLowerBoundMeta meta;
-  meta.set_lower_bound(log_id);
+  WalStreamUpperBoundMeta meta;
+  meta.set_upper_bound(log_id);
   auto succ = meta.AppendToString(value);
   if (!succ) {
     RETURN_NOT_OK(ErrorCode::kSerializeFailed);

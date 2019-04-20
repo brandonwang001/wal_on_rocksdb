@@ -33,11 +33,14 @@ TEST(WalStream, TestOpen) {
         << "last_log_id : " << last_log_id << " "
         << "next_log_id : " << next_log_id;
   }
+  LOG(INFO) << "append log succ";
   // read log
   int64_t lower_bound = 0;
   int64_t upper_bound = 0;
   ret = wal_stream.GetFirstLogId(&lower_bound);
   CHECK(ret == Ok()) << ret.ToString();
+  CHECK(lower_bound == 1) << "lower_bound : "
+      << lower_bound;
   ret = wal_stream.GetLastLogId(&upper_bound);
   CHECK(ret == Ok()) << ret.ToString();
   CHECK(upper_bound == log_num)
