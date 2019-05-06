@@ -54,10 +54,19 @@ TEST(WalStream, TestWriteAndRead) {
     CHECK(std::to_string(term) == log) << "term : "
         << term << "  log : " << log;
   }
+  rocksdb::Env* env = rocksdb::Env::Default();
+  std::vector<std::string> result;
+  env->GetChildren(dir + "/" + stream_uuid, &result);
+  for (auto& file : result) {
+    if (file != "." && file != "..") {
+      env->DeleteFile(dir + "/" + stream_uuid + "/" + file);
+    }
+  }
+  env->DeleteDir(dir + "/" + stream_uuid);
 }
 
 TEST(WalStream, TestTruncate) {
-  std::string stream_uuid = "tablet_0";
+  std::string stream_uuid = "tablet_1";
   std::string dir = "./";
   WalStream wal_stream(stream_uuid, dir);
   auto ret = wal_stream.Init();
@@ -123,6 +132,16 @@ TEST(WalStream, TestTruncate) {
     ret = wal_stream.GetLog(i, &term, &log);
     CHECK(ret == Ok()) << ret.ToString();
   }
+  rocksdb::Env* env = rocksdb::Env::Default();
+  std::vector<std::string> result;
+  env->GetChildren(dir + "/" + stream_uuid, &result);
+  for (auto& file : result) {
+    if (file != "." && file != "..") {
+      LOG(INFO) << "file : " << file;
+      env->DeleteFile(dir + "/" + stream_uuid + "/" + file);
+    }
+  }
+  env->DeleteDir(dir + "/" + stream_uuid);
 }
 
 }  // mamespace wal

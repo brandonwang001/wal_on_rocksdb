@@ -18,6 +18,7 @@ Error WalStream::Init() {
   auto status = rocksdb::DB::Open(
       options, path, &db_);
   if (!status.ok()) {
+    LOG(ERROR) << status.ToString();
     RETURN_NOT_OK(ErrorCode::kRocksDBOpenFailed);
   }
   int64_t lower_bound = 0;
