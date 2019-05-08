@@ -159,7 +159,7 @@ Error WalStream::Release(int64_t log_id) {
   if (log_id > max_log_id) {
     LOG(FATAL) << "invalid para";
   }
-  ret = DeleteTo(log_id);
+  ret = DeleteTo(log_id, log_id);
   IF_NOT_OK_RETURN(ret);
   RETURN_OK();
 }
@@ -175,6 +175,7 @@ Error WalStream::GetLogIdRange(int64_t* min_log_id,
 }
 
 Error WalStream::Truncate(int64_t log_id) {
+  CHECK_GE(log_id, 1);
   std::lock_guard<std:: mutex> lock(mutex_);
   int64_t lower_bound = 0;
   int64_t upper_bound = 0;
@@ -183,13 +184,13 @@ Error WalStream::Truncate(int64_t log_id) {
       &next_log_id);
   IF_NOT_OK_RETURN(ret);
   if (log_id < lower_bound) {
-    ret = DeleteFrom(lower_bound);
+    ret = DeleteFrom(lower_bound, log_id);
     IF_NOT_OK_RETURN(ret);
   } else if (log_id > upper_bound) {
-    ret = DeleteTo(upper_bound);
+    ret = DeleteTo(upper_bound, log_id);
     IF_NOT_OK_RETURN(ret);
   } else {
-    ret = DeleteFrom(log_id);
+    ret = DeleteFrom(log_id, log_id);
     IF_NOT_OK_RETURN(ret);
   }
   RETURN_OK();
@@ -225,7 +226,8 @@ Error WalStream::ReadData(int64_t log_id,
   RETURN_OK();
 }
 
-Error WalStream::DeleteFrom(int64_t log_id_start) {
+Error WalStream::DeleteFrom(int64_t log_id_start,
+    int64_t start_from) {
   CHECK_GE(log_id_start, 1);
   int64_t lower_bound = 0;
   int64_t upper_bound = 0;
@@ -246,9 +248,9 @@ Error WalStream::DeleteFrom(int64_t log_id_start) {
         BatchWriteType::kDelete, key, ""));
   }
   if (log_id_start == lower_bound) {
-    lower_bound = 0;
-    upper_bound = 0;
-    next_log_id = log_id_start;
+    lower_bound = start_from;
+    upper_bound = start_from;
+    next_log_id = start_from;
   } else {
     upper_bound = log_id_start - 1;
     next_log_id = log_id_start;
@@ -282,7 +284,8 @@ Error WalStream::DeleteFrom(int64_t log_id_start) {
   RETURN_OK();
 }
 
-Error WalStream::DeleteTo(int64_t log_id_end) {
+Error WalStream::DeleteTo(int64_t log_id_end,
+    int64_t start_from) {
   CHECK_GE(log_id_end, 1);
   int64_t lower_bound = 0;
   int64_t upper_bound = 0;
@@ -303,9 +306,9 @@ Error WalStream::DeleteTo(int64_t log_id_end) {
         BatchWriteType::kDelete, key, ""));
   }
   if (log_id_end == upper_bound) {
-    lower_bound = 0;
-    upper_bound = 0;
-    next_log_id = log_id_end + 1;
+    lower_bound = start_from;
+    upper_bound = start_from;
+    next_log_id = start_from;
   } else {
     lower_bound = log_id_end + 1;
     next_log_id = upper_bound + 1;

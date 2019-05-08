@@ -70,7 +70,7 @@ waltest:
 	rm -rf ./*.o
 	mv wal_test $(WAL_PATH)/test
 	@pwd
-	export DYLD_LIBRARY_PATH=$(shell pwd)
+	export DYLD_LIBRARY_PATH=$(shell pwd)/lib
 	@pwd
 clean:
 	rm -rf ./*.o

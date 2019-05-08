@@ -70,9 +70,11 @@ class WalStream : public WalStreamInf {
   Error ReadData(int64_t log_id, int64_t* term,
       std::string* log);
 
-  Error DeleteFrom(int64_t log_id_start);
+  Error DeleteFrom(int64_t log_id_start,
+      int64_t start_from);
 
-  Error DeleteTo(int64_t log_id_end);
+  Error DeleteTo(int64_t log_id_end,
+      int64_t start_from);
 
   Error WriteMeta(int64_t log_id_lower_bound,
       int64_t log_id_upper_bound,
